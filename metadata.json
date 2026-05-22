@@ -1,0 +1,6 @@
+{
+  "name": "Dashboard EDC & QRIS BRI Ads",
+  "description": "Monitoring dashboard for EDC and QRIS performance with CSV upload and management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
