@@ -1,30 +1,45 @@
 import { Menu, User } from "lucide-react";
 
-export default function Header() {
+// 1. Tambahkan interface untuk menerima kiriman fungsi dari Layout.tsx
+interface HeaderProps {
+  onMenuClick: () => void;
+}
+
+export default function Header({ onMenuClick }: HeaderProps) {
   return (
-    <header className="bg-white h-16 border-b border-gray-200 flex items-center justify-between px-8 sticky top-0 z-40">
-      <div className="flex items-center gap-4">
-        <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors md:hidden">
-          <Menu className="w-6 h-6" />
+    <header className="bg-white h-16 border-b border-gray-200 flex items-center justify-between px-4 md:px-8 sticky top-0 z-40">
+      <div className="flex items-center gap-2">
+        
+        {/* 2. TOMBOL HAMBURGER: Muncul hanya di layar kecil (lg:hidden) */}
+        <button 
+          onClick={onMenuClick} 
+          className="lg:hidden p-2 hover:bg-gray-50 rounded-xl border border-gray-100 transition-colors"
+          aria-label="Menu"
+        >
+          <Menu className="w-5 h-5 text-[#00529C]" />
         </button>
-        <div className="flex items-center gap-2">
-          {/* <img 
-            src="https://upload.wikimedia.org/wikipedia/commons/2/2e/BRI_Logo.svg" 
-            alt="BRI Logo" 
-            className="h-8" 
-          /> */}
-          <span className="h-6 w-[1.5px] bg-gray-300 mx-2 hidden sm:block"></span>
-          <h2 className="text-base font-black text-[#00529C] hidden sm:block uppercase tracking-tight">Dashboard EDC BRI KC KEBUMEN</h2>
+
+        <div className="flex items-center">
+          {/* Garis pembatas: Sembunyikan di HP biar judul bisa mepet ke kiri */}
+          <span className="h-6 w-[1.5px] bg-gray-200 mx-2 hidden lg:block"></span>
+          
+          {/* Judul: Pakai text-[10px] di HP agar tidak hancur/turun ke bawah */}
+          <h2 className="text-[10px] sm:text-xs md:text-base font-black text-[#00529C] uppercase tracking-tighter md:tracking-tight">
+            Dashboard <span className="hidden xs:inline">EDC BRI</span> KC KEBUMEN
+          </h2>
         </div>
       </div>
 
-      <div className="flex items-center gap-4">
-        <div className="text-right flex flex-col justify-center">
-          <div className="text-[11px] font-black flex items-center gap-1 justify-end uppercase tracking-wide">
-            <User className="w-3.5 h-3.5 text-[#00529C]" />
-            Selamat datang
+      {/* Bagian User Profile */}
+      <div className="flex items-center gap-3">
+        <div className="text-right flex flex-col justify-center border-l border-gray-100 pl-3 md:pl-4">
+          <div className="text-[9px] md:text-[11px] font-black flex items-center gap-1 justify-end uppercase tracking-wide text-gray-700">
+            <User className="w-3 h-3 md:w-3.5 md:h-3.5 text-[#00529C]" />
+            <span className="hidden sm:inline">Selamat datang,</span> Admin
           </div>
-          <div className="text-[9px] text-gray-400 font-bold uppercase tracking-wider">Kantor Cabang Kebumen (0032) </div>
+          <div className="text-[7px] md:text-[9px] text-gray-400 font-bold uppercase tracking-widest">
+            KC Kebumen (0032)
+          </div>
         </div>
       </div>
     </header>
